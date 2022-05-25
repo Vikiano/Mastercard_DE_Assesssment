@@ -1,17 +1,17 @@
-with 
+WITH
 
-t1 as (
+t1 AS (
 SELECT datetime('now','localtime') AS 'Report DateTime'
 ),
 
-t2 as (
+t2 AS (
   SELECT 
 	COUNT(DISTINCT(Name)) AS 'Total Players', 
 	COUNT(DISTINCT(Team)) AS 'Total Teams'
 FROM sqltest_table 
 ),
 
-t3 as (
+t3 AS (
 SELECT 
 json_group_array(
 	json_object('Name', Name, 'Goals', Goals)
@@ -23,7 +23,7 @@ FROM (SELECT Name, SUM(Goals) AS Goals
 				LIMIT 3)
 ),
 
-t4 as (
+t4 AS (
   SELECT COUNT(*)  AS 'Teams GT 250'
 FROM
 	(SELECT *
@@ -33,9 +33,9 @@ FROM
 		Team
 	HAVING SUM(Goals) > 250
 	ORDER BY 
-		1 DESC) As Z
+		1 DESC) AS Z
 )
 
-select *
-from t1 join t2 join t3 join t4
--- on t1.rn = t2.rn
+SELECT *
+FROM t1 JOIN t2 JOIN t3 JOIN t4
+;

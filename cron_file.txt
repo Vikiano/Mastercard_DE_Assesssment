@@ -1,0 +1,3 @@
+MAILTO=francisvictor47@gmail.com
+
+0 5 * * 1-5 /Users/victorfrancis/opt/miniconda3/bin/python '/Users/victorfrancis/Downloads/Data Engineer Test/test.py'
