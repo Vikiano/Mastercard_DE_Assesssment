@@ -5,6 +5,7 @@
 ```
 import sqlite3
 import pandas as pd
+
 con = sqlite3.connect('/Users/victorfrancis/Downloads/Data Engineer Test/de_test_db.sqlite')
 
 cur = con.cursor()
