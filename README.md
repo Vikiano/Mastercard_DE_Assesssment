@@ -1,6 +1,24 @@
-# Mastercard_DE_Assesssment
+# Mastercard_DE_Assesssment (Solution by **Victor Francis**)
 
-## Usage Instructions
+## Problem Overview
+
+### Scenario
+The Analytics Team has described for you a series of SQL queries that they regularly run
+against our data store to pull aggregate information. They use these queries to create daily
+reports and/or perform ad-hoc investigations.
+Your task is to automate this process by creating a system which automatically extracts the
+information on a regular basis, and dumps that information to a local csv file.
+The queries themselves are described below, as is the format of the csv’s expected output.
+Feel free to use whatever tooling/language you feel is most appropriate to the task.
+
+### Target Queries
+1. How many players are in the table?
+2. How many teams are there?
+3. Who are the top 3 players who scored the most goals in order and how many goals?
+4. How many teams had more than 250 goals from all their team players combined?
+
+## My Solution
+### Usage Instructions
 1. Create `test.py`
 ```
 import sqlite3
@@ -66,9 +84,25 @@ except FileNotFoundError:
     df_new.to_csv(file, sep="|", index=False)
     pass
 ```
-2. Create a cron job using the the cron commands in `cron_file.txt`
+2. Create a cron job using `crontab -e`.  
+
+3. Edit and paste the commands in `cron_file.txt`
 ```
 MAILTO=francisvictor47@gmail.com
 
 0 5 * * 1-5 /Users/victorfrancis/opt/miniconda3/bin/python '/Users/victorfrancis/Downloads/Data Engineer Test/test.py'
 ```
+
+## Snapshot of Output
+
+- In this output, the cronjob is configured to run for every minute, which is different from the expectation to run at 5am Monday to Friday, so I can display an output as I only have a 24-hour window to make this solution. The proper schedule has been coded in the `cron_file.txt` in this repo.
+
+|Report DateTime    |Total Players|Total Teams|Top Three Players Stats                                                                                   |Teams GT 250|
+|-------------------|-------------|-----------|----------------------------------------------------------------------------------------------------------|------------|
+|2022-05-25 05:49:00|880          |30         |[{"Name":"Alex Ovechkin","Goals":53},{"Name":"Steven Stamkos","Goals":43},{"Name":"Rick Nash","Goals":42}]|5           |
+|2022-05-25 05:50:00|880          |30         |[{"Name":"Alex Ovechkin","Goals":53},{"Name":"Steven Stamkos","Goals":43},{"Name":"Rick Nash","Goals":42}]|5           |
+|2022-05-25 05:51:00|880          |30         |[{"Name":"Alex Ovechkin","Goals":53},{"Name":"Steven Stamkos","Goals":43},{"Name":"Rick Nash","Goals":42}]|5           |
+|2022-05-25 05:52:00|880          |30         |[{"Name":"Alex Ovechkin","Goals":53},{"Name":"Steven Stamkos","Goals":43},{"Name":"Rick Nash","Goals":42}]|5           |
+|2022-05-25 05:53:00|880          |30         |[{"Name":"Alex Ovechkin","Goals":53},{"Name":"Steven Stamkos","Goals":43},{"Name":"Rick Nash","Goals":42}]|5           |
+|2022-05-25 05:54:00|880          |30         |[{"Name":"Alex Ovechkin","Goals":53},{"Name":"Steven Stamkos","Goals":43},{"Name":"Rick Nash","Goals":42}]|5           |
+|2022-05-25 06:04:00|880          |30         |[{"Name":"Alex Ovechkin","Goals":53},{"Name":"Steven Stamkos","Goals":43},{"Name":"Rick Nash","Goals":42}]|5           |
